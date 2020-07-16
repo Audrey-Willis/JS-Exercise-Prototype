@@ -39,9 +39,27 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(name, age) {
+  this.stomach = []
+  this.name = name;
+  this.age = age;
 
-}
+};
+Person.prototype.eat = function(food){
+  if(this.stomach.length < 10){
+    this.stomach.push(food);
+  }else{
+
+  }
+  };
+Person.prototype.poop = function(){
+  this.stomach = []
+  };
+  Person.prototype.toString = function(){
+ return `${this.name},${this.age}`
+  };
+  Person('Neo', 20);
+
 
 /*
   TASK 2
@@ -57,10 +75,20 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(model, milesperGallon) {
+  this.tank = 0
+  this.odometer = 0
+  this.model = model
+  this.milesPerGallon = milesperGallon;
 
 }
-
+Car.prototype.fill = function(gallons){
+this.gallons = gallons;
+let fillAmount = this.tank + this.gallons;
+ this.tank = fillAmount;
+return this.tank
+}
+Car('BatMobile', 20);
 /*
   TASK 3
     - Write a Baby constructor subclassing Person.
@@ -68,18 +96,25 @@ function Car() {
     - Besides the methods on Person.prototype, babies have the ability to `.play()`:
         + Should return a string "Playing with x", x being the favorite toy.
 */
-function Baby() {
-
+function Baby(name, age, favoriteToy) {
+Person.call(this, name, age);
+this.favoriteToy = favoriteToy;
 }
+Baby.prototype = Object.create(Person.prototype);
+
+Baby.prototype.play = function(){
+return `playing with ${this.favoriteToy}`;
+}
+Baby("Lucy", 5, "trains");
 
 /* 
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. default binding, the regualt calling of a function
+  2. Implicit binding, binds the object before the dot
+  3. Explicit binding, where you manually bind the this keyowrd to a function
+  4. New binding, makes a new object to bind this to.
 */
 
 
